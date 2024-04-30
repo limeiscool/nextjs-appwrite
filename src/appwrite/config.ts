@@ -15,6 +15,7 @@ type LoginUserAccount = {
 const client = new Client();
 
 client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId);
+
 export const account = new Account(client);
 
 export class AppwriteService {
@@ -27,7 +28,7 @@ export class AppwriteService {
       } else {
         return newAccount;
       }
-    } catch (error) {
+    } catch (error:any) {
       throw error
     }
   }
@@ -44,9 +45,8 @@ export class AppwriteService {
     try {
       const data = await this.getCurrentUser();
       return Boolean(data)
-    } catch (error) {
-      return false
-    }
+    } catch (error) {}
+    return false
   }
 
   async getCurrentUser() {
